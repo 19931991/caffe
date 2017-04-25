@@ -11,7 +11,7 @@ plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
 
 # Make sure that caffe is on the python path:
-caffe_root = 'your_caffe_root/'  # this file is expected to be in {caffe_root}/examples
+caffe_root = '~/Documents/Textboxes/Textboxes'  # this file is expected to be in {caffe_root}/examples
 os.chdir(caffe_root)
 import sys
 sys.path.insert(0, 'python')
@@ -20,8 +20,8 @@ import caffe
 caffe.set_device(0)
 caffe.set_mode_gpu()
 
-model_def = 'your_caffe_root/examples/TextBoxes/deploy.prototxt'
-model_weights = 'your_caffe_root/examples/TextBoxes/TextBoxes_icdar13.caffemodel'
+model_def = '~/Documents/Textboxes/Textboxes/examples/TextBoxes/deploy.prototxt'
+model_weights = '~/Documents/TextBoxes/TextBoxes_icdar13.caffemodel'
 
 scales=((700,700),)
 # IMPORTANT: If use mutliple scales in the paper, you need an extra non-maximum superession for the results
@@ -35,12 +35,12 @@ net = caffe.Net(model_def,      # defines the structure of the model
 # input preprocessing: 'data' is the name of the input blob == net.inputs[0]
 print(net.blobs['data'].data.shape)
 
-test_list=open('icdar_2013_dataset_root/test_list.txt')
-save_dir='your_caffe_root/data/TextBoxes/test_bb/'
+test_list=open('~/Documents/TextBoxes/test_list.txt')
+save_dir='~/Documents/Textboxes/data/TextBoxes/test_bb/'
 for line in test_list.readlines():
 	line=line.strip()
 	image_name=line
-	image_path='icdar_2013_dataset_root/test_images/'+line
+	image_path='~/Documents/TextBoxes/traingset/'+line
 	save_detection_path=save_dir+'res_'+line[0:len(line)-4]+'.txt'
 	image=caffe.io.load_image(image_path)
 	image_height,image_width,channels=image.shape
@@ -102,7 +102,7 @@ for line in test_list.readlines():
 
 	detection_result.close()
 
-	plt.savefig('your_caffe_root/data/TextBoxes/visu_icdar13/'+image_name)
+	plt.savefig('~/Documents/Textboxes/data/TextBoxes/visu_icdar13/'+image_name)
 test_list.close()
 print('success')
 

@@ -54,9 +54,9 @@ resume_training = True
 remove_old_models = False
 
 # The database file for training data. Created by data/text/create_data.sh
-train_data = "path_to_train_lmdb/text_icdar_trainval_lmdb"
+train_data = "/home/ada/Documents/Textboxes/lmdb/_train_lmdb"
 # The database file for testing data. Created by data/text_10x/create_data.sh
-test_data = "path_to_test_lmdb/text_icdar_test_lmdb"
+test_data = "/home/ada/Documents/Textboxes/lmdb/_test_lmdb"
 # Specify the batch sampler.
 resize_width = 300
 resize_height = 300
@@ -186,7 +186,7 @@ if use_batchnorm:
     base_lr = 0.004
 else:
     # A learning rate for batch_size = 1, num_gpus = 1.
-    base_lr = 0.000004
+    base_lr = 0.000000004
 
 # Modify the job name if you want.
 job_name = "longer_conv_{}".format(resize)
@@ -215,7 +215,7 @@ job_file = "{}/{}.sh".format(job_dir, model_name)
 # Stores the test image names and sizes. Created by data/text/create_list.sh
 # name_size_file = "data/text/test_name_size.txt"
 # The pretrained model. We use the Fully convolutional reduced (atrous) VGGNet.
-pretrain_model = "models/VGGNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
+pretrain_model = "/home/ada/Documents/Textboxes/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
 # Stores LabelMapItem.
 label_map_file = "examples/TextBoxes/labelmap_voc.prototxt"
 
@@ -287,8 +287,8 @@ gpulist = gpus.split(",")
 num_gpus = len(gpulist)
 
 # Divide the mini-batch to different GPUs.
-batch_size = 32
-accum_batch_size = 32
+batch_size = 16
+accum_batch_size = 16
 iter_size = accum_batch_size / batch_size
 solver_mode = P.Solver.CPU
 device_id = 0
