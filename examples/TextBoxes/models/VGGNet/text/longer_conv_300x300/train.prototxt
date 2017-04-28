@@ -28,8 +28,8 @@ layer {
     }
   }
   data_param {
-    source: "~/Documents/Textboxes/lmdb/_train_lmdb"
-    batch_size: 32
+    source: "/home/ada/Documents/Textboxes/lmdb/_train_lmdb"
+    batch_size: 16
     backend: LMDB
   }
   annotated_data_param {

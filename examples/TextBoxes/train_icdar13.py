@@ -54,9 +54,9 @@ resume_training = True
 remove_old_models = False
 
 # The database file for training data. Created by data/text/create_data.sh
-train_data = "/home/ada/Documents/Textboxes/lmdb/_train_lmdb"
+train_data = "/home/ada/Documents/Textboxes/lmdb/icdar2013_train_lmdb"
 # The database file for testing data. Created by data/text_10x/create_data.sh
-test_data = "/home/ada/Documents/Textboxes/lmdb/_test_lmdb"
+test_data = "/home/ada/Documents/Textboxes/lmdb/icdar2013_test_lmdb"
 # Specify the batch sampler.
 resize_width = 300
 resize_height = 300
@@ -186,7 +186,7 @@ if use_batchnorm:
     base_lr = 0.004
 else:
     # A learning rate for batch_size = 1, num_gpus = 1.
-    base_lr = 0.000000004
+    base_lr = 0.000004
 
 # Modify the job name if you want.
 job_name = "longer_conv_{}".format(resize)

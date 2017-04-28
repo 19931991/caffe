@@ -6,8 +6,9 @@ cd $root_dir
 redo=true
 data_root_dir="$HOME/Documents/Textboxes"
 mapfile="$root_dir/examples/TextBoxes/labelmap_voc.prototxt"
+dataset_name="icdar2013"
 anno_type="detection"
-label_type="txt"
+label_type="xml"
 db="lmdb"
 min_dim=0
 max_dim=0
@@ -21,5 +22,5 @@ then
 fi
 for subset in train test
 do
-  python $root_dir/scripts/create_annoset.py --anno-type=$anno_type --label-type=$label_type --label-map-file=$mapfile --min-dim=$min_dim --max-dim=$max_dim --resize-width=$width --resize-height=$height --check-label $extra_cmd $data_root_dir $data_root_dir/TextBoxes/examples/TextBoxes/$subset.txt $data_root_dir/$db/$dataset_name"_"$subset"_"$db examples/$dataset_name 2>&1 | tee $root_dir/data/$dataset_name/$subset.log
+  python $root_dir/scripts/create_annoset.py --anno-type=$anno_type --label-type=$label_type --label-map-file=$mapfile --min-dim=$min_dim --max-dim=$max_dim --resize-width=$width --resize-height=$height --check-label $extra_cmd $data_root_dir $data_root_dir/$subset.txt $data_root_dir/$db/$dataset_name"_"$subset"_"$db examples/$dataset_name 2>&1 | tee $root_dir/data/$dataset_name/$subset.log
 done

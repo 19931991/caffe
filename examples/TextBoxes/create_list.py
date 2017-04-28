@@ -17,7 +17,7 @@ parent_dir = "icdar2013"
 img_ext = "jpg"
 # The directory which contains the annotations.
 anno_prefix = "gt"
-anno_ext = "txt"
+anno_ext = "xml"
 
 train_list_file = "{}/train.txt".format(CURDIR)
 test_list_file = "{}/test.txt".format(CURDIR)
@@ -27,7 +27,7 @@ test_list_file = "{}/test.txt".format(CURDIR)
 if redo or not os.path.exists(train_list_file):
     datasets = ["icdar2013"]
     imgdir = "Challenge2_Training_Task12_Images"
-    anno_dir = "Challenge2_Training_Task1_GT"
+    anno_dir = "Challenge2_Training_Task1_GT_xml"
     img_files = []
     anno_files = []
     for dataset in datasets:
@@ -38,7 +38,7 @@ if redo or not os.path.exists(train_list_file):
                 img_file = "{}/{}/{}.{}".format(parent_dir, imgdir, name, img_ext)
                 assert os.path.exists("{}/{}".format(data_dir, img_file)), \
                         "{}/{} does not exist".format(data_dir, img_file)
-                anno_file = "{}/{}/{}_{}.{}".format(parent_dir, anno_dir, anno_prefix, name, anno_ext)
+                anno_file = "{}/{}/{}.{}".format(parent_dir, anno_dir,  name, anno_ext)
                 assert os.path.exists("{}/{}".format(data_dir, anno_file)), \
                         "{}/{} does not exist".format(data_dir, anno_file)
                 img_files.append(img_file)
@@ -53,7 +53,7 @@ if redo or not os.path.exists(train_list_file):
 if redo or not os.path.exists(train_list_file):
     datasets = ["icdar2013_val"]
     imgdir = "Challenge2_Test_Task12_Images"
-    anno_dir = "Challenge2_Test_Task1_GT"
+    anno_dir = "Challenge2_Test_Task1_GT_xml"
     img_files = []
     anno_files = []
     for dataset in datasets:
@@ -64,7 +64,7 @@ if redo or not os.path.exists(train_list_file):
                 img_file = "{}/{}/{}.{}".format(parent_dir, imgdir, name, img_ext)
                 assert os.path.exists("{}/{}".format(data_dir, img_file)), \
                         "{}/{} does not exist".format(data_dir, img_file)
-                anno_file = "{}/{}/{}_{}.{}".format(parent_dir, anno_dir, anno_prefix, name, anno_ext)
+                anno_file = "{}/{}/{}.{}".format(parent_dir, anno_dir, name, anno_ext)
                 assert os.path.exists("{}/{}".format(data_dir, anno_file)), \
                         "{}/{} does not exist".format(data_dir, anno_file)
                 img_files.append(img_file)

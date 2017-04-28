@@ -20,7 +20,7 @@ layer {
     }
   }
   data_param {
-    source: "~/Documents/Textboxes/lmdb/_test_lmdb"
+    source: "/home/ada/Documents/Textboxes/lmdb/_test_lmdb"
     batch_size: 1
     backend: LMDB
   }
