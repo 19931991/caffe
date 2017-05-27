@@ -58,8 +58,8 @@ train_data = "/home/ada/Documents/Textboxes/lmdb/icdar2013_train_lmdb"
 # The database file for testing data. Created by data/text_10x/create_data.sh
 test_data = "/home/ada/Documents/Textboxes/lmdb/icdar2013_test_lmdb"
 # Specify the batch sampler.
-resize_width = 300
-resize_height = 300
+resize_width = 400
+resize_height = 100
 resize = "{}x{}".format(resize_width, resize_height)
 batch_sampler = [
         {

@@ -1,11 +1,14 @@
 clear all;
-test_list_file='path_to_icdar13/test_list.txt';
-img_dir = 'path_to_icdar13/test_images/';
-gt_dir= 'path_to_icdar13/test_gts/';
+test_list_file='/home/ubuntu/data/test_mlocr.txt';
+img_dir = '/home/ubuntu/data/test_images/';
+gt_dir= '/home/ubuntu/data/test_xml/result_60000/';
 % multi-scale detection results directory
-dt_dir = 'path_to_multi_scale_detection_results/';
+dt_dir = '/home/ubuntu/data/multi_scale_result/';
 % save results to upload to ICDAR 2015 website
-icdar_test_dir='./icdar_submit_results/';
+icdar_test_dir='/home/ubuntu/data/multi_scale_result_upload/';
+
+javaaddpath ("/Users/panks/Dropbox/silversparro/xerces-2_11_0/xercesImpl.jar");
+javaaddpath ("/Users/panks/Dropbox/silversparro/xerces-2_11_0/xml-apis.jar");
 
 [img_name]=textread(test_list_file,'%s');
 %settings
@@ -17,10 +20,22 @@ box_num=0;
 for ii=1:nImg
     name = img_name(ii);
     name=char(name);
-    img=imread([img_dir,name]);
+    img=imread([img_dir,name,'.jpg']);
     [img_height,img_width,~]=size(img);
-    gt_path = [ gt_dir,'gt_',name(1:end-3),'txt'];
-    [x1,y1,x3,y3,str]=textread(gt_path,'%d,%d,%d,%d,%s');
+    gt_path = [ gt_dir,'gt_',name(1:end-3),'.xml'];
+
+    parser = javaObject('org.apache.xerces.parsers.DOMParser');
+    parser.parse(gt_path); % it seems that cd in octave are taken into account
+    xDoc = parser.getDocument;
+
+    % get first data element
+    bndbox = xDoc.getElementsByTagName('annotation').item(0).getElementsByTagName('object').item(0).getElementsByTagName('bndbox').item(0);
+    x1 = bndbox.getElementsByTagName('xmin').item(0).getFirstChild.getTextContent
+    y1 = bndbox.getElementsByTagName('ymin').item(0).getFirstChild.getTextContent
+    x3 = bndbox.getElementsByTagName('xmax').item(0).getFirstChild.getTextContent
+    y3 = bndbox.getElementsByTagName('ymax').item(0).getFirstChild.getTextContent
+    disp(["xml data",x1,y1,x3,y3]);
+
     x2=x3;
     y2=y1;
     x4=x1;
